@@ -95,6 +95,16 @@ function checkContent(str1, str2) {
 // Misollar
 console.log(checkContent("mitgroup", "gmtiprou")); 
 console.log(checkContent("hello", "world"));       
+// C Task
+function checkContent(str1, str2) {
+ let set1 = new Set(str1);
+  let set2 = new Set(str2);
+  let arr1 = [...set1].sort();
+  let arr2 = [...set2].sort();
+  return arr1.join('') === arr2.join('');
+}
+console.log(checkContent("mitgroup", "gmtiprou")); 
+console.log(checkContent("hello", "world"));       
 
 
 //B TASK
