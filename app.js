@@ -4,14 +4,10 @@ const express = require("express");
 const app = express();
 const fs = require("fs");
 
-// let user;
-// fs.readFile(`database/user.json`, `utf8`, (err, data) => {
-//   if (err) {
-//     console.log(`ERROR: `, err);
-//   } else {
-//     user = JSON.parse(data);
-//   }
-// });
+// fs.readFile o‘rniga:
+const data = fs.readFileSync("database/user.json", "utf8");
+const user = JSON.parse(data);
+
 
 // MongoDB chaqirish
 const db = require("./server").db();
@@ -61,32 +57,40 @@ app.post("/delete-item", (req, res) => {
   );
 });
 
+// "edit-item" endpoint: ma'lumotni tahrirlash
 app.post("/edit-item", (req, res) => {
-  const data = req.body;
-  console.log(data);
+  const data = req.body; // Foydalanuvchi yuborgan ma'lumotlarni olish
+  console.log(data);     // Konsolda ko'rish uchun log qilish
+
+  // MongoDB'da plans kolleksiyasidan id bo'yicha hujjatni topib yangilash
   db.collection("plans").findOneAndUpdate(
     {
-      _id: new mongoDB.ObjectId(data.id),
+      _id: new mongoDB.ObjectId(data.id), // Qaysi hujjatni yangilash kerakligini aniqlash
     },
-    { $set: { reja: data.new_input } },
-    function (err, data) {
-      res.json({ state: "Success" });
+    { 
+      $set: { reja: data.new_input }      // "reja" maydonini yangi qiymatga o'zgartirish
+    },
+    function (err, data) {                // Callback: operatsiya tugagach ishlaydi
+      res.json({ state: "Success" });     // Javob sifatida JSON qaytarish
     },
   );
 });
 
+// "delete-all" endpoint: hamma hujjatlarni o'chirish
 app.post("/delete-all", (req, res) => {
-  if (req.body.delete_all) {
-    db.collection(`plans`).deleteMany(function () {
-      res.json({ state: "Hamma Rejalar o'chirildi" });
+  if (req.body.delete_all) {              // Agar foydalanuvchi delete_all flagini yuborsa
+    db.collection(`plans`).deleteMany(function () { 
+      // plans kolleksiyasidagi barcha hujjatlarni o'chirish
+      res.json({ state: "Hamma Rejalar o'chirildi" }); // Javob qaytarish
     });
   }
 });
 
 
-// app.get("/author", (req, res) => {
-//   res.render("author", { user: user });
-// });
+
+app.get("/author", (req, res) => {
+  res.render("author", { user: user });
+});
 
 app.get("/", function (req, res) {
   console.log("User entered /");

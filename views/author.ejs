@@ -4,8 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="/public/main.css" />
-    <link
+    <link rel="stylesheet" href="/main.css" /><link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
       rel="stylesheet"
     />
@@ -21,7 +20,7 @@
           <div class="left_1">
             <div class="left_1-1">
               <img
-                src="/public/author/images/profile.png"
+                src="images/profile.png"
                 width="156px"
                 height="142px"
                 alt=""
@@ -30,23 +29,23 @@
             <div class="left_1-2"><%=user.name%></div>
             <div class="left_1-3"><%=user.profession%></div>
             <div class="left-icons">
-              <a class="link_href" href="">
-                <div class="icon"><img src="/public/author/icon/Facebook.svg" class="icon-1" /></div>
+             <a class="link_href" href="">
+                <div class="icon"><img src="icon/Facebook.svg" class="icon-1" /></div>
               </a>
               <a class="link_href" href="">
-                <div class="icon"><img src="/public/author/icon/Instagram.svg" class="icon-1" /></div>
+                <div class="icon"><img src="icon/Instagram.svg" class="icon-1" /></div>
               </a>
               <a class="link_href" href="">
-                <div class="icon"><img src="/public/author/icon/Twitter.svg" class="icon-1" /></div>
+                <div class="icon"><img src="icon/Twitter.svg" class="icon-1" /></div>
               </a>
               <a class="link_href" href="">
-                <div class="icon"><img src="/public/author/icon/Linkeding.svg" class="icon-1" /></div>
+                <div class="icon"><img src="icon/Linkeding.svg" class="icon-1" /></div>
               </a>
               <a class="link_href" href="">
-                <div class="icon"><img src="/public/author/icon/Youtube.svg" class="icon-1" /></div>
+                <div class="icon"><img src="icon/Youtube.svg" class="icon-1" /></div>
               </a>
               <a class="link_href" href="">
-                <div class="icon"><img src="/public/author/icon/Dribbble.svg" class="icon-1" /></div>
+                <div class="icon"><img src="icon/Dribbble.svg" class="icon-1" /></div>
               </a>
             </div>
           </div>
@@ -88,7 +87,8 @@
                   <span class="skill-percent"><%=langPercents[i] || 70%>%</span>
                 </div>
                 <div class="skill-bar">
-                  <div class="skill-fill" style<%=langPercents[i] || 70%>%></div>
+                  <span class="skill-percent"><%= langPercents[i] || 70 %>%</span>
+
                 </div>
               </div>
             <% }); %>
@@ -109,7 +109,9 @@
                   <span class="skill-percent"><%=skillPercents[i] || 70%>%</span>
                 </div>
                 <div class="skill-bar">
-                  <div class="skill-fill" style=<%=langPercents[i] || 70%>%></div>
+              <span class="skill-percent"><%= langPercents[i] || 70 %>%</span>
+
+
                 </div>
               </div>
             <% }); %>
@@ -146,7 +148,7 @@
               <a href="#contact" class="btn-hire">HIRE ME <i class="fa fa-arrow-right"></i></a>
             </div>
             <div class="hero-image">
-              <img src="/public/author/images/profile.png" alt="" />
+              <img src="images/profile.png" alt="" />
             </div>
           </div>
 
@@ -155,27 +157,27 @@
   <p class="services-desc"><%=user.service_desc%></p>
   <div class="services-grid">
     <div class="service-card">
-      <img src="/public/author/menu_icon/coding.svg" class="service-icon-img" alt="" />
+      <img src="menu_icon/coding.svg" class="service-icon-img" alt="" />
       <h3>Web Development</h3>
       <p>Blog, E-Commerce</p>
     </div>
     <div class="service-card">
-      <img src="/public/author/menu_icon/illustration.svg" class="service-icon-img" alt="" />
+      <img src="menu_icon/illustration.svg" class="service-icon-img" alt="" />
       <h3>UI/UX Design</h3>
       <p>Mobile App, Website Design</p>
     </div>
     <div class="service-card">
-      <img src="/public/author/menu_icon/Icons_Microphone.png" class="service-icon-img" alt="" />
+      <img src="menu_icon/Icons_Microphone.png" class="service-icon-img" alt="" />
       <h3>Sound Design</h3>
       <p>Voice Over, Beat Making</p>
     </div>
     <div class="service-card">
-      <img src="/public/author/menu_icon/game-development.svg" class="service-icon-img" alt="" />
+      <img src="menu_icon/game-development.svg" class="service-icon-img" alt="" />
       <h3>Game Design</h3>
       <p>Character Design, Props & Objects</p>
     </div>
     <div class="service-card">
-      <img src="/public/author/menu_icon/Icons_Photographer.svg" class="service-icon-img" alt="" />
+      <img src="menu_icon/Icons_Photographer.svg" class="service-icon-img" alt="" />
       <h3>Photography</h3>
       <p>Portrait, Product Photography</p>
     </div>

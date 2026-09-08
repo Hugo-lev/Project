@@ -86,9 +86,19 @@ if (e.target.classList.contains("edit-me")) {
 
 });
 
+// "clean-all" id'li tugmaga click event qo'shilyapti
 document.getElementById("clean-all").addEventListener("click", function () {
+  
+  // Tugma bosilganda serverga POST so'rov yuboriladi
+  // "/delete-all" endpointiga { delete_all: true } JSON yuboriladi
   axios.post("/delete-all", { delete_all: true }).then((response) => {
+    
+    // Serverdan kelgan javobni alert orqali ko'rsatadi
+    // Masalan: "Hamma Rejalar o'chirildi"
     alert(response.data.state);
+    
+    // Keyin sahifani qayta yuklaydi, shunda o'chirilgan ma'lumotlar UI'dan ham yo'qoladi
     document.location.reload();
   });
 });
+
