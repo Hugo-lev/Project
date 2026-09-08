@@ -1,209 +1,205 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="/main.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="/public/main.css" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+    />
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <title>PORTFOLIO</title>
-</head>
+    <title>Portfolio</title>
+  </head>
+  <body>
+    <div class="frame">
+      <div class="main_frame">
 
-<body>
-    <div class = "frame">
-        <div class="main_frame">
-           <div class="left_frame"> 
-                <div class="left_1">
-                    <div class="left_1-1">
-                        <img src="images/profile.png" width="156px" height="142px" alt="">
-                    </div>
-                    <div class="left_1-2"><%=user.name%></div>
-                    <div class="left_1-3"><%=user.profession%></div>
-                    <div class="left-icons">
-                        <a class="link_href" href="">
-                            <div class="icon">
-                                <img src="icon/Icons-facebook.svg" class="icon-1">
-                            </div>
-                        </a>
-
-                        <a class="link_href" href="">
-                            <div class="icon">
-                                <img src="icon/Icons-instagram.svg" class="icon-1">
-                            </div>
-                        </a>
-
-                        <a class="link_href" href="">
-                            <div class="icon">
-                                <img src="icon/Icons-twitter.svg" class="icon-1">
-                            </div>
-                        </a>
-
-                        <a class="link_href" href="">
-                            <div class="icon">
-                                <img src="icon/Icons-Youtube.svg" class="icon-1">
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="marginer"></div>
-                <div class="left_2">
-                    <div class="info-row">
-                        <span class="info-label">Age:</span>
-                        <span class="info-value"><%=user.age%></span>
-                    </div>
-                    <div class="info-row">
-                        <span class="info-label">Residence:</span>
-                        <span class="info-value"><%=user.residence%></span>
-                    </div>
-                    <div class="info-row">
-                        <span class="info-label">Freelance:</span>
-                        <span class="info-value text-green">Available</span>
-                    </div>
-                    <div class="info-row">
-                        <span class="info-label">Address:</span>
-                        <span class="info-value"><%=user.adress%></span>
-                    </div>
-                </div>
-                <div class="marginer"></div>
-                <div class="left_3">
-                    <h3 class="section-title">Languages</h3>
-                        <div class="lang-row">
-                            <div class="lang-info">
-                                <span>Russian</span>
-                                <span>60%</span>
-                            </div>
-                            <div class="progress-bg">
-                                <div
-                                    class="progress-fill"
-                                    style="width: 100%"
-                                ></div>
-                            </div>
-                        </div>
-
-                        <div class="lang-row">
-                            <div class="lang-info">
-                                <span>Korean</span>
-                                <span>40%</span>
-                            </div>
-                            <div class="progress-bg">
-                                <div
-                                    class="progress-fill"
-                                    style="width: 80%"
-                                ></div>
-                            </div>
-                        </div>
-
-                    <div class="lang-row">
-                        <div class="lang-info">
-                            <span>English</span>
-                            <span>20%</span>
-                        </div>
-                            <div class="progress-bg">
-                                <div
-                                    class="progress-fill"
-                                    style="width: 60%"
-                                ></div>
-                            </div>
-                    </div>
-                </div>    
-                <div class="marginer"></div>
-                <div class="left_4">
-                    <h3 class="section-title">Skills</h3>
-                        <div class="lang-row">
-                            <div class="lang-info">
-                                <span>Html</span>
-                                <span>90%</span>
-                            </div>
-                            <div class="progress-bg">
-                                <div
-                                    class="progress-fill"
-                                    style="width: 90%"
-                                ></div>
-                            </div>
-                        </div>
-
-                        <div class="lang-row">
-                            <div class="lang-info">
-                                <span>CSS</span>
-                                <span>85%</span>
-                            </div>
-                            <div class="progress-bg">
-                                <div
-                                    class="progress-fill"
-                                    style="width: 85%"
-                                ></div>
-                            </div>
-                        </div>
-
-                        <div class="lang-row">
-                            <div class="lang-info">
-                                <span>Js</span>
-                                <span>80%</span>
-                            </div>
-                            <div class="progress-bg">
-                                <div
-                                    class="progress-fill"
-                                    style="width: 80%"
-                                ></div>
-                            </div>
-                        </div>
-                        <div class="lang-row">
-                            <div class="lang-info">
-                                <span>PHP</span>
-                                <span>75%</span>
-                            </div>
-                            <div class="progress-bg">
-                                <div
-                                    class="progress-fill"
-                                    style="width: 75%"
-                                ></div>
-                            </div>
-                        </div>
-                        <div class="lang-row">
-                            <div class="lang-info">
-                                <span>WordPress</span>
-                                <span>85%</span>
-                            </div>
-                            <div class="progress-bg">
-                                <div
-                                    class="progress-fill"
-                                    style="width: 85%"
-                                ></div>
-                            </div>
-                        </div>
-                </div>
-                <div class="marginer"></div>
-                <div class="left_5">
-                    <h4 class="section-title">Extra Skills</h4>
-
-                        <ul class="extra-list">
-                            <li>
-                                <i class="fa fa-code"></i> Bootstrap,
-                                   Materialize
-                            </li>
-                            <li>
-                                <i class="fa fa-code"></i> Stylus, Sass, Less
-                            </li>
-                            <li>
-                                <i class="fa fa-code"></i> Gulp, Webpack, Grunt
-                            </li>
-                                <li><i class="fa fa-code"></i> GIT Knowledge</li>
-                            </ul>
-                </div>
-           </div>
-            <div class="marginer"></div>
-            <div class="mid_frame">
-                <div class="mid-1"></div>
-                <div class="marginer"></div>
-                <div class="mid-2"></div>
-                <div class="marginer"></div>
+        <!-- LEFT SIDEBAR -->
+        <div class="left_frame">
+          <div class="left_1">
+            <div class="left_1-1">
+              <img
+                src="/public/author/images/profile.png"
+                width="156px"
+                height="142px"
+                alt=""
+              />
             </div>
-            <div class="right_frame"></div>
+            <div class="left_1-2"><%=user.name%></div>
+            <div class="left_1-3"><%=user.profession%></div>
+            <div class="left-icons">
+              <a class="link_href" href="">
+                <div class="icon"><img src="/public/author/icon/Facebook.svg" class="icon-1" /></div>
+              </a>
+              <a class="link_href" href="">
+                <div class="icon"><img src="/public/author/icon/Instagram.svg" class="icon-1" /></div>
+              </a>
+              <a class="link_href" href="">
+                <div class="icon"><img src="/public/author/icon/Twitter.svg" class="icon-1" /></div>
+              </a>
+              <a class="link_href" href="">
+                <div class="icon"><img src="/public/author/icon/Linkeding.svg" class="icon-1" /></div>
+              </a>
+              <a class="link_href" href="">
+                <div class="icon"><img src="/public/author/icon/Youtube.svg" class="icon-1" /></div>
+              </a>
+              <a class="link_href" href="">
+                <div class="icon"><img src="/public/author/icon/Dribbble.svg" class="icon-1" /></div>
+              </a>
+            </div>
+          </div>
 
+          <div class="marginer"></div>
+
+          
+          <div class="left_2">
+            <div class="info-row">
+              <span class="info-label">Age:</span>
+              <span class="info-value"><%=user.age%></span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Residence:</span>
+              <span class="info-value"><%=user.residence%></span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Freelance:</span>
+              <span class="info-value info-available">Available</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Address:</span>
+              <span class="info-value"><%=user.address%></span>
+            </div>
+          </div>
+
+          <div class="marginer"></div>
+
+          
+          <% var langNames = []; %>
+          <% user.languages.forEach(function(entry){ entry.split(',').forEach(function(l){ langNames.push(l.trim()); }); }); %>
+          <% var langPercents = [100, 60, 90]; %>
+          <div class="left_3">
+            <div class="section-title">Languages</div>
+            <% langNames.forEach(function(lang, i){ %>
+              <div class="skill-row">
+                <div class="skill-top">
+                  <span class="skill-name"><%=lang%></span>
+                  <span class="skill-percent"><%=langPercents[i] || 70%>%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-fill" style<%=langPercents[i] || 70%>%></div>
+                </div>
+              </div>
+            <% }); %>
+          </div>
+
+          <div class="marginer"></div>
+
+          
+          <% var skillNames = []; %>
+          <% user.skills.forEach(function(entry){ entry.split(',').forEach(function(s){ skillNames.push(s.trim()); }); }); %>
+          <% var skillPercents = [90, 85, 80, 75, 70]; %>
+          <div class="left_4">
+            <div class="section-title">Skills</div>
+            <% skillNames.forEach(function(skill, i){ %>
+              <div class="skill-row">
+                <div class="skill-top">
+                  <span class="skill-name"><%=skill%></span>
+                  <span class="skill-percent"><%=skillPercents[i] || 70%>%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-fill" style=<%=langPercents[i] || 70%>%></div>
+                </div>
+              </div>
+            <% }); %>
+          </div>
+
+          <div class="marginer"></div>
+
+          <!-- Extra Skills -->
+          <div class="left_5">
+            <div class="section-title">Extra Skills</div>
+            <ul class="extra-skills-list">
+              <% user.extra_skills.forEach(function(skill){ %>
+                <li><i class="fa fa-file-code-o extra-icon"></i><%=skill%></li>
+              <% }); %>
+            </ul>
+          </div>
 
         </div>
-    </div>
-    
-</body>
 
+        <!-- MIDDLE / MAIN CONTENT -->
+        <div class="midd_frame">
+
+          <div class="hero">
+            <span class="deco deco-circle-1"></span>
+            <span class="deco deco-circle-2"></span>
+            <span class="deco deco-circle-3"></span>
+            <span class="deco deco-diamond-1"></span>
+            <span class="deco deco-diamond-2"></span>
+            <span class="deco deco-triangle"></span>
+
+            <div class="hero-text">
+              <h1><span class="underline-text"><%=user.profession%></span></h1>
+              <p><%=user.about_me%></p>
+              <a href="#contact" class="btn-hire">HIRE ME <i class="fa fa-arrow-right"></i></a>
+            </div>
+            <div class="hero-image">
+              <img src="/public/author/images/profile.png" alt="" />
+            </div>
+          </div>
+
+          <div class="services">
+  <h2>My Services</h2>
+  <p class="services-desc"><%=user.service_desc%></p>
+  <div class="services-grid">
+    <div class="service-card">
+      <img src="/public/author/menu_icon/coding.svg" class="service-icon-img" alt="" />
+      <h3>Web Development</h3>
+      <p>Blog, E-Commerce</p>
+    </div>
+    <div class="service-card">
+      <img src="/public/author/menu_icon/illustration.svg" class="service-icon-img" alt="" />
+      <h3>UI/UX Design</h3>
+      <p>Mobile App, Website Design</p>
+    </div>
+    <div class="service-card">
+      <img src="/public/author/menu_icon/Icons_Microphone.png" class="service-icon-img" alt="" />
+      <h3>Sound Design</h3>
+      <p>Voice Over, Beat Making</p>
+    </div>
+    <div class="service-card">
+      <img src="/public/author/menu_icon/game-development.svg" class="service-icon-img" alt="" />
+      <h3>Game Design</h3>
+      <p>Character Design, Props & Objects</p>
+    </div>
+    <div class="service-card">
+      <img src="/public/author/menu_icon/Icons_Photographer.svg" class="service-icon-img" alt="" />
+      <h3>Photography</h3>
+      <p>Portrait, Product Photography</p>
+    </div>
+    <div class="service-card service-card-text">
+      <h3>Advertising</h3>
+      <p>Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit. Vitae Nulla Diam In Ac Dictum A Urna Viverra Morbi.</p>
+      <a href="#" class="order-now">ORDER NOW <i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+</div>
+        </div>
+
+        <!-- RIGHT ICON NAV -->
+        <div class="right_frame">
+          <div class="nav-icon dark-toggle"><i class="fa fa-moon-o"></i></div>
+          <div class="nav-icon active"><i class="fa fa-home"></i></div>
+          <div class="nav-icon"><i class="fa fa-code"></i></div>
+          <div class="nav-icon"><i class="fa fa-graduation-cap"></i></div>
+          <div class="nav-icon"><i class="fa fa-briefcase"></i></div>
+          <div class="nav-icon"><i class="fa fa-square-o"></i></div>
+          <div class="nav-icon"><i class="fa fa-comment-o"></i></div>
+        </div>
+
+      </div>
+    </div>
+  </body>
 </html>
