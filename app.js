@@ -1,4 +1,4 @@
-console.log(`Web Serverni boshlash`);
+console.log("Web Serverni boshlash");
 
 const express = require("express");
 const app = express();
@@ -42,7 +42,7 @@ app.set("view engine", "ejs"); // view engine bu ejs ekanligi korsatilyapdi
 // });
 
 app.post("/create-item", (req, res) => {
-  console.log(`You entered /create-item`);
+  console.log("You entered /create-item");
   console.log(req.body);
   const new_reja = req.body.reja;
   db.collection("plans").insertOne({ reja: new_reja }, (err, data) => {
@@ -75,10 +75,10 @@ app.post("/edit-item", (req, res) => {
   );
 });
 
-app.post(`/delete-all`, (req, res) => {
+app.post("/delete-all", (req, res) => {
   if (req.body.delete_all) {
     db.collection(`plans`).deleteMany(function () {
-      res.json({ state: `Hamma Rejalar o'chirildi` });
+      res.json({ state: "Hamma Rejalar o'chirildi" });
     });
   }
 });
