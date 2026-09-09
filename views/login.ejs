@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="uz">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kirish | REJA</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+      integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg-1: #0f0c29;
+        --bg-2: #302b63;
+        --bg-3: #24243e;
+        --accent: #00d9c0;
+        --accent-2: #7f5af0;
+        --danger: #ff6b81;
+        --glass: rgba(255, 255, 255, 0.06);
+        --glass-border: rgba(255, 255, 255, 0.12);
+        --text-main: #f2f2f7;
+        --text-muted: #a3a3b8;
+      }
+
+      * {
+        font-family: "Manrope", sans-serif;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+      }
+
+      body {
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(-45deg, var(--bg-1), var(--bg-2), var(--bg-3), var(--bg-1));
+        background-size: 400% 400%;
+        animation: gradientShift 18s ease infinite;
+        position: relative;
+        overflow: hidden;
+      }
+
+      body::before,
+      body::after {
+        content: "";
+        position: fixed;
+        width: 420px;
+        height: 420px;
+        border-radius: 50%;
+        filter: blur(120px);
+        opacity: 0.35;
+        z-index: 0;
+      }
+
+      body::before {
+        background: var(--accent);
+        top: -100px;
+        left: -100px;
+        animation: floatBlob 10s ease-in-out infinite;
+      }
+
+      body::after {
+        background: var(--accent-2);
+        bottom: -100px;
+        right: -100px;
+        animation: floatBlob 12s ease-in-out infinite reverse;
+      }
+
+      @keyframes gradientShift {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+
+      @keyframes floatBlob {
+        0%, 100% { transform: translate(0, 0); }
+        50% { transform: translate(30px, 30px); }
+      }
+
+      .auth-card {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        max-width: 380px;
+        background: var(--glass);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+        border-radius: 22px;
+        box-shadow: 0 25px 55px rgba(0, 0, 0, 0.4);
+        padding: 38px 32px;
+        margin: 20px;
+        animation: cardIn 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      @keyframes cardIn {
+        from {
+          opacity: 0;
+          transform: translateY(18px) scale(0.98);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      .auth-logo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 18px;
+        width: 56px;
+        height: 56px;
+        border-radius: 16px;
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        box-shadow: 0 10px 25px rgba(0, 217, 192, 0.35);
+      }
+
+      .auth-logo svg {
+        width: 28px;
+        height: 28px;
+      }
+
+      .auth-badge {
+        text-align: center;
+        color: var(--accent);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        margin-bottom: 8px;
+      }
+
+      .auth-title {
+        text-align: center;
+        color: var(--text-main);
+        font-weight: 800;
+        font-size: 26px;
+        margin-bottom: 28px;
+        letter-spacing: -0.5px;
+      }
+
+      .form-group {
+        margin-bottom: 18px;
+      }
+
+      .form-group label {
+        color: var(--text-muted);
+        font-size: 13px;
+        font-weight: 600;
+        margin-bottom: 6px;
+        display: block;
+      }
+
+      .input-wrap {
+        position: relative;
+      }
+
+      .input-wrap .input-icon {
+        position: absolute;
+        left: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--text-muted);
+        pointer-events: none;
+        transition: color 0.2s ease;
+      }
+
+      .input-wrap:focus-within .input-icon {
+        color: var(--accent);
+      }
+
+      .form-control {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1.5px solid var(--glass-border);
+        color: var(--text-main);
+        border-radius: 12px;
+        padding: 12px 16px 12px 42px;
+        height: auto;
+        width: 100%;
+        font-size: 14px;
+        transition: all 0.25s ease;
+      }
+
+      .form-control.has-toggle {
+        padding-right: 42px;
+      }
+
+      .form-control:focus {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: var(--accent);
+        box-shadow: 0 0 0 4px rgba(0, 217, 192, 0.15);
+        color: var(--text-main);
+        outline: none;
+      }
+
+      .form-control::placeholder {
+        color: var(--text-muted);
+      }
+
+      .toggle-password {
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        color: var(--text-muted);
+        cursor: pointer;
+        padding: 4px;
+        display: flex;
+        align-items: center;
+        transition: color 0.2s ease;
+      }
+
+      .toggle-password:hover {
+        color: var(--accent);
+      }
+
+      .btn-auth {
+        width: 100%;
+        background: linear-gradient(120deg, var(--accent), var(--accent-2));
+        border: none;
+        border-radius: 12px;
+        padding: 13px;
+        font-weight: 700;
+        color: #0f0c29;
+        margin-top: 10px;
+        transition: all 0.25s ease;
+        box-shadow: 0 8px 20px rgba(0, 217, 192, 0.3);
+      }
+
+      .btn-auth:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 28px rgba(127, 90, 240, 0.4);
+        color: #0f0c29;
+      }
+
+      .btn-auth:active {
+        transform: translateY(0);
+      }
+
+      .auth-error {
+        background: rgba(255, 107, 129, 0.12);
+        border: 1px solid rgba(255, 107, 129, 0.3);
+        color: var(--danger);
+        border-radius: 10px;
+        padding: 10px 14px;
+        font-size: 13.5px;
+        margin-bottom: 18px;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+      }
+
+      .auth-switch {
+        text-align: center;
+        color: var(--text-muted);
+        font-size: 13.5px;
+        margin-top: 24px;
+      }
+
+      .auth-switch a {
+        color: var(--accent);
+        font-weight: 600;
+        text-decoration: none;
+      }
+
+      .auth-switch a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="auth-card">
+      <div class="auth-logo">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M9 11l3 3L22 4" stroke="#0f0c29" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h11" stroke="#0f0c29" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="auth-badge">Reja va Maqsadlar</div>
+      <div class="auth-title">Xush kelibsiz 👋</div>
+
+      <% if (typeof error !== 'undefined' && error) { %>
+      <div class="auth-error">⚠️ <%= error %></div>
+      <% } %>
+
+      <form action="/login" method="POST">
+        <div class="form-group">
+          <label>Foydalanuvchi nomi</label>
+          <div class="input-wrap">
+            <span class="input-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10Z" stroke="currentColor" stroke-width="2"/>
+                <path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </span>
+            <input
+              type="text"
+              name="username"
+              class="form-control"
+              placeholder="Loginingizni kiriting"
+              autocomplete="off"
+              autofocus
+              required
+            />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Parol</label>
+          <div class="input-wrap">
+            <span class="input-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="4" y="10" width="16" height="10" rx="2" stroke="currentColor" stroke-width="2"/>
+                <path d="M8 10V7a4 4 0 1 1 8 0v3" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </span>
+            <input
+              type="password"
+              name="password"
+              id="password-field"
+              class="form-control has-toggle"
+              placeholder="Parolingizni kiriting"
+              required
+            />
+            <button type="button" class="toggle-password" id="toggle-password" aria-label="Parolni ko'rsatish">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z" stroke="currentColor" stroke-width="2"/>
+                <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <button type="submit" class="btn-auth">Kirish</button>
+      </form>
+
+      <div class="auth-switch">
+        Hisobingiz yo'qmi? <a href="/register">Ro'yxatdan o'ting</a>
+      </div>
+    </div>
+
+    <script>
+      const toggleBtn = document.getElementById("toggle-password");
+      const passwordField = document.getElementById("password-field");
+      if (toggleBtn && passwordField) {
+        toggleBtn.addEventListener("click", function () {
+          const isHidden = passwordField.type === "password";
+          passwordField.type = isHidden ? "text" : "password";
+        });
+      }
+    </script>
+  </body>
+</html>

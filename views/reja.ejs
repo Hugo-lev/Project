@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uz">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,12 +10,344 @@
       integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
       crossorigin="anonymous"
     />
-  </head>
-  <body style="background-color: #b8bbd1">
-    <div class="container">
-      <h1 class="display-4 text-center py-1">REJA VA MAQSADLAR</h1>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg-1: #0f0c29;
+        --bg-2: #302b63;
+        --bg-3: #24243e;
+        --accent: #00d9c0;
+        --accent-2: #7f5af0;
+        --danger: #ff6b81;
+        --danger-dark: #e6435c;
+        --glass: rgba(255, 255, 255, 0.06);
+        --glass-border: rgba(255, 255, 255, 0.12);
+        --text-main: #f2f2f7;
+        --text-muted: #a3a3b8;
+      }
 
-      <div class="jumbotron p-3 shadow-sm">
+      * {
+        font-family: "Manrope", sans-serif;
+        box-sizing: border-box;
+      }
+
+      html, body {
+        min-height: 100vh;
+      }
+
+      body {
+        margin: 0;
+        background: linear-gradient(-45deg, var(--bg-1), var(--bg-2), var(--bg-3), var(--bg-1));
+        background-size: 400% 400%;
+        animation: gradientShift 18s ease infinite;
+        padding-bottom: 70px;
+        position: relative;
+        overflow-x: hidden;
+      }
+
+      body::before,
+      body::after {
+        content: "";
+        position: fixed;
+        width: 420px;
+        height: 420px;
+        border-radius: 50%;
+        filter: blur(120px);
+        opacity: 0.35;
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      body::before {
+        background: var(--accent);
+        top: -100px;
+        left: -100px;
+      }
+
+      body::after {
+        background: var(--accent-2);
+        bottom: -100px;
+        right: -100px;
+      }
+
+      @keyframes gradientShift {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+
+      .container {
+        max-width: 680px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .top-badge {
+        display: flex;
+        justify-content: center;
+        margin-top: 45px;
+      }
+
+      .top-badge span {
+        background: var(--glass);
+        border: 1px solid var(--glass-border);
+        color: var(--accent);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        padding: 6px 16px;
+        border-radius: 30px;
+        backdrop-filter: blur(10px);
+      }
+
+      h1.display-4 {
+        color: var(--text-main);
+        font-weight: 800;
+        text-align: center;
+        margin-top: 14px;
+        margin-bottom: 34px;
+        letter-spacing: -1px;
+        background: linear-gradient(90deg, #ffffff, var(--accent) 120%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      /* Glass karta - yangi reja qo'shish */
+      .jumbotron {
+        background: var(--glass);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+        border-radius: 20px;
+        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
+        padding: 24px !important;
+        margin-bottom: 34px;
+      }
+
+      #create-field {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1.5px solid var(--glass-border);
+        color: var(--text-main);
+        border-radius: 14px;
+        padding: 13px 18px;
+        font-size: 15px;
+        transition: all 0.25s ease;
+      }
+
+      #create-field::placeholder {
+        color: var(--text-muted);
+      }
+
+      #create-field:focus {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 4px rgba(0, 217, 192, 0.15);
+        outline: none;
+        background: rgba(255, 255, 255, 0.08);
+        color: var(--text-main);
+      }
+
+      .jumbotron .btn-primary {
+        background: linear-gradient(120deg, var(--accent), var(--accent-2));
+        border: none;
+        border-radius: 14px !important;
+        padding: 13px 26px;
+        font-weight: 700;
+        color: #0f0c29;
+        white-space: nowrap;
+        transition: all 0.25s ease;
+        box-shadow: 0 8px 20px rgba(0, 217, 192, 0.3);
+      }
+
+      .jumbotron .btn-primary:hover {
+        transform: translateY(-2px) scale(1.02);
+        box-shadow: 0 12px 28px rgba(127, 90, 240, 0.4);
+        color: #0f0c29;
+      }
+
+      /* Rejalar ro'yxati */
+      #item-list {
+        padding: 0;
+        list-style: none;
+      }
+
+      #item-list .list-group-item {
+        background: var(--glass) !important;
+        border: 1px solid var(--glass-border) !important;
+        backdrop-filter: blur(14px);
+        border-radius: 16px !important;
+        margin-bottom: 14px;
+        padding: 17px 20px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+        transition: all 0.25s ease;
+        animation: fadeIn 0.4s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      #item-list .list-group-item::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 4px;
+        background: linear-gradient(180deg, var(--accent), var(--accent-2));
+      }
+
+      #item-list .list-group-item:hover {
+        transform: translateX(4px);
+        border-color: rgba(0, 217, 192, 0.4);
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+      }
+
+      .item-text {
+        color: var(--text-main);
+        font-size: 16px;
+        font-weight: 500;
+        word-break: break-word;
+        margin-right: 12px;
+        padding-left: 6px;
+      }
+
+      .edit-me,
+      .delete-me {
+        border: none;
+        border-radius: 10px !important;
+        padding: 8px 15px;
+        font-weight: 600;
+        font-size: 12.5px;
+        letter-spacing: 0.3px;
+        transition: all 0.2s ease;
+      }
+
+      .edit-me {
+        background: rgba(255, 209, 102, 0.15);
+        color: #ffd166;
+        border: 1px solid rgba(255, 209, 102, 0.3) !important;
+      }
+
+      .edit-me:hover {
+        background: #ffd166;
+        color: #3a2c00;
+        transform: scale(1.06);
+      }
+
+      .delete-me {
+        background: rgba(255, 107, 129, 0.15);
+        color: var(--danger);
+        border: 1px solid rgba(255, 107, 129, 0.3) !important;
+      }
+
+      .delete-me:hover {
+        background: var(--danger-dark);
+        color: #fff;
+        transform: scale(1.06);
+      }
+
+      /* Hammasini o'chirish tugmasi */
+      #clean-all {
+        display: block;
+        margin: 26px auto 0;
+        background: transparent;
+        border: 1.5px solid var(--danger);
+        color: var(--danger);
+        border-radius: 30px;
+        padding: 12px 32px;
+        font-weight: 700;
+        font-size: 13.5px;
+        letter-spacing: 0.6px;
+        text-transform: uppercase;
+        transition: all 0.25s ease;
+      }
+
+      #clean-all:hover {
+        background: var(--danger);
+        color: #fff;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 24px rgba(255, 107, 129, 0.35);
+      }
+
+      /* Bo'sh ro'yxat holati */
+      .empty-state {
+        text-align: center;
+        color: var(--text-muted);
+        padding: 40px 20px;
+        font-size: 15px;
+        background: var(--glass);
+        border: 1px dashed var(--glass-border);
+        border-radius: 16px;
+      }
+
+      /* Foydalanuvchi paneli */
+      .user-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 45px;
+      }
+
+      .user-bar .top-badge {
+        margin-top: 0;
+        justify-content: flex-start;
+      }
+
+      .user-bar .logout-link {
+        background: var(--glass);
+        border: 1px solid var(--glass-border);
+        color: var(--text-muted);
+        font-size: 12.5px;
+        font-weight: 600;
+        padding: 7px 16px;
+        border-radius: 30px;
+        text-decoration: none;
+        backdrop-filter: blur(10px);
+        transition: all 0.2s ease;
+      }
+
+      .user-bar .logout-link:hover {
+        color: var(--danger);
+        border-color: rgba(255, 107, 129, 0.4);
+        text-decoration: none;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(12px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--accent-2);
+        border-radius: 10px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="user-bar">
+        <div class="top-badge"><span>Salom, <%= username %> 👋</span></div>
+        <a href="/logout" class="logout-link">Chiqish</a>
+      </div>
+      <h1 class="display-4 py-1">REJA VA MAQSADLAR</h1>
+
+      <div class="jumbotron">
         <form id="create-form" action="/create-item" method="POST">
           <div class="d-flex align-items-center">
             <input
@@ -25,38 +357,37 @@
               autocomplete="off"
               class="form-control mr-3"
               type="text"
+              placeholder="Nima rejalashtiryapsiz?"
               style="flex: 1"
             />
-            <button class="btn btn-primary" style="border-radius: 20px">
-              Yangi Reja Qo'shish
-            </button>
+            <button class="btn btn-primary">+ Qo'shish</button>
           </div>
         </form>
       </div>
 
-     
-      <ul id="item-list" class="list-group pb-5">
-         <% items.map(function(item){ %>
-          <li
-          class="list-group-item list-group-item-info d-flex align-items-center justify-content-between"
+      <ul id="item-list" class="list-group pb-4">
+        <% if (items.length === 0) { %>
+        <li class="empty-state">Hozircha rejalar yo'q. Birinchisini qo'shing! ✨</li>
+        <% } %> <% items.map(function(item){ %>
+        <li
+          class="list-group-item d-flex align-items-center justify-content-between"
         >
-          <span class="item-text"><%= item.reja%></span>
+          <span class="item-text"><%= item.reja %></span>
           <div>
-            <button  data-id="<%=item._id%>"  class="edit-me btn btn-secondary btn-sm mr-1">
+            <button data-id="<%= item._id %>" class="edit-me btn btn-sm mr-1">
               O'zgartirish
             </button>
-            <button data-id="<%= item._id %>"  class="delete-me btn btn-danger btn-sm">O'chirish</button>
+            <button data-id="<%= item._id %>" class="delete-me btn btn-sm">
+              O'chirish
+            </button>
           </div>
         </li>
-         <% }) %>
-        
+        <% }) %>
       </ul>
 
-     <button id="clean-all" class="btn btn-danger" style="border-radius: 20px">
-        Hamma Rejalarni o'chirish
-      </button>
+      <button id="clean-all" class="btn">Hamma Rejalarni o'chirish</button>
     </div>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="/browser.js"> </script>
+    <script src="/browser.js"></script>
   </body>
 </html>
