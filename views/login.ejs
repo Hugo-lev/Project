@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="uz">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kirish | REJA</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg-1: #0f0c29;
+        --bg-2: #302b63;
+        --bg-3: #24243e;
+        --accent: #00d9c0;
+        --accent-2: #7f5af0;
+        --danger: #ff6b81;
+        --glass: rgba(255, 255, 255, 0.06);
+        --glass-border: rgba(255, 255, 255, 0.12);
+        --text-main: #f2f2f7;
+        --text-muted: #a3a3b8;
+      }
+
+      * {
+        font-family: "Manrope", sans-serif;
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html,
+      body {
+        height: 100%;
+        overflow: hidden;
+      }
+
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(-45deg, var(--bg-1), var(--bg-2), var(--bg-3), var(--bg-1));
+        background-size: 400% 400%;
+        animation: gradientShift 18s ease infinite;
+        position: relative;
+      }
+
+      @keyframes gradientShift {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+
+      /* ===== FLOATING BLOBS ===== */
+      .blob {
+        position: fixed;
+        border-radius: 50%;
+        filter: blur(120px);
+        opacity: 0.35;
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      .blob-1 {
+        width: 450px;
+        height: 450px;
+        background: var(--accent);
+        top: -150px;
+        left: -150px;
+        animation: floatBlob1 12s ease-in-out infinite;
+      }
+
+      .blob-2 {
+        width: 350px;
+        height: 350px;
+        background: var(--accent-2);
+        bottom: -100px;
+        right: -100px;
+        animation: floatBlob2 14s ease-in-out infinite reverse;
+      }
+
+      .blob-3 {
+        width: 200px;
+        height: 200px;
+        background: #ff6b81;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        animation: floatBlob3 18s ease-in-out infinite;
+        opacity: 0.15;
+      }
+
+      @keyframes floatBlob1 {
+        0%, 100% { transform: translate(0, 0) scale(1); }
+        33% { transform: translate(80px, -60px) scale(1.2); }
+        66% { transform: translate(-40px, 60px) scale(0.8); }
+      }
+
+      @keyframes floatBlob2 {
+        0%, 100% { transform: translate(0, 0) scale(1); }
+        33% { transform: translate(-70px, 50px) scale(1.3); }
+        66% { transform: translate(60px, -40px) scale(0.7); }
+      }
+
+      @keyframes floatBlob3 {
+        0%, 100% { transform: translate(-50%, -50%) scale(1) rotate(0deg); }
+        50% { transform: translate(-50%, -50%) scale(1.5) rotate(180deg); }
+      }
+
+      /* ===== LOGIN CARD ===== */
+      .auth-card {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        max-width: 420px;
+        background: var(--glass);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        border-radius: 28px;
+        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+        padding: 36px 32px 40px;
+        margin: 20px;
+        animation: cardIn 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .auth-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
+      }
+
+      @keyframes cardIn {
+        from {
+          opacity: 0;
+          transform: translateY(40px) scale(0.92) rotate(-2deg);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1) rotate(0deg);
+        }
+      }
+
+      /* ========================================== */
+      /* ===== LOGIN RASM / ILLUSTRATION ===== */
+      /* ========================================== */
+      .login-illustration {
+        text-align: center;
+        margin-bottom: 16px;
+        position: relative;
+        animation: illustrationAppear 1s ease 0.2s both;
+      }
+
+      @keyframes illustrationAppear {
+        from {
+          opacity: 0;
+          transform: scale(0.8) rotate(-10deg);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1) rotate(0deg);
+        }
+      }
+
+      .login-illustration svg {
+        width: 130px;
+        height: 130px;
+        filter: drop-shadow(0 10px 40px rgba(0, 217, 192, 0.25));
+        animation: illustrationFloat 5s ease-in-out infinite;
+        transition: transform 0.3s ease;
+        cursor: pointer;
+      }
+
+      .login-illustration svg:hover {
+        transform: scale(1.05) rotate(5deg);
+      }
+
+      @keyframes illustrationFloat {
+        0%, 100% { transform: translateY(0) scale(1); }
+        50% { transform: translateY(-12px) scale(1.02); }
+      }
+
+      /* ===== LOGO BADGE ===== */
+      .auth-badge {
+        text-align: center;
+        color: var(--accent);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        margin-bottom: 4px;
+        animation: fadeInUp 1s ease 0.3s both;
+      }
+
+      .auth-title {
+        text-align: center;
+        color: var(--text-main);
+        font-weight: 800;
+        font-size: 26px;
+        margin-bottom: 28px;
+        letter-spacing: -0.5px;
+        animation: fadeInUp 1s ease 0.4s both;
+      }
+
+      .auth-title span {
+        background: linear-gradient(90deg, var(--accent), var(--accent-2));
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        display: inline-block;
+        animation: wave 2s ease-in-out infinite;
+      }
+
+      @keyframes wave {
+        0%, 100% { transform: rotate(0deg); }
+        25% { transform: rotate(15deg); }
+        75% { transform: rotate(-10deg); }
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* ===== FORM ===== */
+      .form-group {
+        margin-bottom: 18px;
+        animation: fadeInUp 1s ease 0.5s both;
+      }
+
+      .form-group label {
+        color: var(--text-muted);
+        font-size: 13px;
+        font-weight: 600;
+        margin-bottom: 6px;
+        display: block;
+      }
+
+      .input-wrap {
+        position: relative;
+      }
+
+      .input-wrap .input-icon {
+        position: absolute;
+        left: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--text-muted);
+        pointer-events: none;
+        transition: all 0.3s ease;
+      }
+
+      .input-wrap:focus-within .input-icon {
+        color: var(--accent);
+        transform: translateY(-50%) scale(1.1) rotate(5deg);
+      }
+
+      .form-control {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1.5px solid var(--glass-border);
+        color: var(--text-main);
+        border-radius: 14px;
+        padding: 13px 16px 13px 46px;
+        height: auto;
+        width: 100%;
+        font-size: 14px;
+        transition: all 0.3s ease;
+      }
+
+      .form-control.has-toggle {
+        padding-right: 46px;
+      }
+
+      .form-control:focus {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: var(--accent);
+        box-shadow: 0 0 0 5px rgba(0, 217, 192, 0.15);
+        color: var(--text-main);
+        outline: none;
+        transform: scale(1.02);
+      }
+
+      .form-control::placeholder {
+        color: var(--text-muted);
+      }
+
+      /* ===== TOGGLE PASSWORD ===== */
+      .toggle-password {
+        position: absolute;
+        right: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        color: var(--text-muted);
+        cursor: pointer;
+        padding: 4px;
+        display: flex;
+        align-items: center;
+        transition: all 0.3s ease;
+      }
+
+      .toggle-password:hover {
+        color: var(--accent);
+        transform: translateY(-50%) scale(1.1);
+      }
+
+      /* ===== BUTTON ===== */
+      .btn-auth {
+        width: 100%;
+        background: linear-gradient(120deg, var(--accent), var(--accent-2));
+        border: none;
+        border-radius: 14px;
+        padding: 14px;
+        font-weight: 700;
+        color: #0f0c29;
+        margin-top: 8px;
+        transition: all 0.3s ease;
+        box-shadow: 0 8px 25px rgba(0, 217, 192, 0.3);
+        position: relative;
+        overflow: hidden;
+        animation: fadeInUp 1s ease 0.7s both;
+      }
+
+      .btn-auth::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 60%);
+        transform: scale(0);
+        transition: transform 0.5s ease;
+      }
+
+      .btn-auth:hover {
+        transform: translateY(-3px) scale(1.02);
+        box-shadow: 0 16px 40px rgba(127, 90, 240, 0.4);
+        color: #0f0c29;
+      }
+
+      .btn-auth:hover::before {
+        transform: scale(1);
+      }
+
+      .btn-auth:active {
+        transform: translateY(0) scale(0.98);
+      }
+
+      /* ===== ERROR ===== */
+      .auth-error {
+        background: rgba(255, 107, 129, 0.12);
+        border: 1px solid rgba(255, 107, 129, 0.3);
+        color: var(--danger);
+        border-radius: 12px;
+        padding: 10px 14px;
+        font-size: 13px;
+        margin-bottom: 16px;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        animation: shake 0.5s ease;
+      }
+
+      @keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        20% { transform: translateX(-10px); }
+        40% { transform: translateX(10px); }
+        60% { transform: translateX(-6px); }
+        80% { transform: translateX(6px); }
+      }
+
+      /* ===== SWITCH ===== */
+      .auth-switch {
+        text-align: center;
+        color: var(--text-muted);
+        font-size: 13.5px;
+        margin-top: 24px;
+        animation: fadeInUp 1s ease 0.9s both;
+      }
+
+      .auth-switch a {
+        color: var(--accent);
+        font-weight: 600;
+        text-decoration: none;
+        position: relative;
+        transition: all 0.3s ease;
+      }
+
+      .auth-switch a::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--accent);
+        transition: width 0.3s ease;
+      }
+
+      .auth-switch a:hover {
+        color: #fff;
+      }
+
+      .auth-switch a:hover::after {
+        width: 100%;
+      }
+
+      /* ===== PARTICLES ===== */
+      .particle {
+        position: fixed;
+        width: 5px;
+        height: 5px;
+        background: var(--accent);
+        border-radius: 50%;
+        pointer-events: none;
+        opacity: 0;
+        z-index: 0;
+        animation: particleFloat linear infinite;
+      }
+
+      @keyframes particleFloat {
+        0% {
+          opacity: 0;
+          transform: translateY(100vh) scale(0);
+        }
+        10% {
+          opacity: 0.5;
+        }
+        90% {
+          opacity: 0.5;
+        }
+        100% {
+          opacity: 0;
+          transform: translateY(-100px) scale(1);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Blobs -->
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+
+    <!-- Particles -->
+    <div id="particles"></div>
+
+    <!-- ========================================== -->
+    <!-- ===== LOGIN CARD ===== -->
+    <!-- ========================================== -->
+    <div class="auth-card">
+      <!-- ====== LOGIN RASM ====== -->
+      <div class="login-illustration">
+        <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- ===== ORQA FON DOIRALAR ===== -->
+          <circle cx="100" cy="100" r="85" fill="url(#loginGrad1)" opacity="0.15"/>
+          <circle cx="100" cy="100" r="65" fill="url(#loginGrad2)" opacity="0.10"/>
+          <circle cx="100" cy="100" r="45" fill="url(#loginGrad1)" opacity="0.05"/>
+
+          <!-- ===== YULDUZCHALAR (SPARKLES) ===== -->
+          <g opacity="0.7">
+            <circle cx="35" cy="35" r="3" fill="#00d9c0">
+              <animate attributeName="opacity" values="0.2;1;0.2" dur="2s" repeatCount="indefinite"/>
+              <animate attributeName="r" values="2;4;2" dur="2s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="170" cy="40" r="2.5" fill="#7f5af0">
+              <animate attributeName="opacity" values="0.2;1;0.2" dur="2.5s" repeatCount="indefinite" begin="0.5s"/>
+              <animate attributeName="r" values="1.5;3.5;1.5" dur="2.5s" repeatCount="indefinite" begin="0.5s"/>
+            </circle>
+            <circle cx="30" cy="165" r="2.5" fill="#00d9c0">
+              <animate attributeName="opacity" values="0.2;1;0.2" dur="3s" repeatCount="indefinite" begin="1s"/>
+              <animate attributeName="r" values="1.5;3.5;1.5" dur="3s" repeatCount="indefinite" begin="1s"/>
+            </circle>
+            <circle cx="170" cy="165" r="3" fill="#7f5af0">
+              <animate attributeName="opacity" values="0.2;1;0.2" dur="2.2s" repeatCount="indefinite" begin="0.3s"/>
+              <animate attributeName="r" values="2;4;2" dur="2.2s" repeatCount="indefinite" begin="0.3s"/>
+            </circle>
+            <circle cx="65" cy="25" r="2" fill="#ffd166">
+              <animate attributeName="opacity" values="0.2;1;0.2" dur="1.8s" repeatCount="indefinite" begin="0.7s"/>
+            </circle>
+            <circle cx="140" cy="175" r="2" fill="#ff6b81">
+              <animate attributeName="opacity" values="0.2;1;0.2" dur="2.8s" repeatCount="indefinite" begin="1.2s"/>
+            </circle>
+          </g>
+
+          <!-- ===== FOYDALANUVCHI IKONKASI (Avatar) ===== -->
+          <g>
+            <!-- Bosh -->
+            <circle cx="100" cy="65" r="22" stroke="url(#loginGrad1)" stroke-width="3.5" fill="rgba(255,255,255,0.05)"/>
+            <circle cx="100" cy="65" r="11" fill="url(#loginGrad1)" opacity="0.5"/>
+            
+            <!-- Ko'zlar -->
+            <circle cx="93" cy="62" r="2.5" fill="#fff" opacity="0.8"/>
+            <circle cx="107" cy="62" r="2.5" fill="#fff" opacity="0.8"/>
+            <circle cx="93" cy="62" r="1.2" fill="#0f0c29"/>
+            <circle cx="107" cy="62" r="1.2" fill="#0f0c29"/>
+            
+            <!-- Tabassum -->
+            <path d="M94 72 C97 76, 103 76, 106 72" stroke="url(#loginGrad2)" stroke-width="2" stroke-linecap="round"/>
+          </g>
+
+          <!-- ===== TANA (Body) ===== -->
+          <path d="M45 160 C45 130, 70 115, 100 115 C130 115, 155 130, 155 160" 
+                stroke="url(#loginGrad1)" stroke-width="3.5" fill="rgba(255,255,255,0.05)"/>
+
+          <!-- ===== QULF (Lock) ===== -->
+          <g>
+            <!-- Qulf tanasi -->
+            <rect x="82" y="115" width="36" height="28" rx="6" 
+                  stroke="url(#loginGrad2)" stroke-width="3" fill="rgba(255,255,255,0.05)"/>
+            <!-- Qulf uzugi -->
+            <path d="M88 115 V105 C88 95, 95 88, 100 88 C105 88, 112 95, 112 105 V115" 
+                  stroke="url(#loginGrad2)" stroke-width="3" fill="none"/>
+            <!-- Qulf kaliti teshigi -->
+            <circle cx="100" cy="127" r="4" fill="url(#loginGrad2)" opacity="0.8"/>
+            <circle cx="100" cy="127" r="1.5" fill="#0f0c29"/>
+          </g>
+
+          <!-- ===== QO'SHIMCHA: XAVFSIZLIK QALQONI ===== -->
+          <g opacity="0.15">
+            <path d="M150 20 L170 30 L170 60 C170 80, 155 90, 145 95" 
+                  stroke="#7f5af0" stroke-width="2" fill="none"/>
+            <path d="M150 20 L130 30 L130 60 C130 80, 145 90, 155 95" 
+                  stroke="#00d9c0" stroke-width="2" fill="none"/>
+          </g>
+
+          <!-- ===== FOYDALANUVCHI NOMI YOZIGI ===== -->
+          <text x="100" y="185" text-anchor="middle" fill="rgba(255,255,255,0.15)" 
+                font-size="8" font-weight="600" letter-spacing="2">
+            WELCOME BACK
+          </text>
+
+          <!-- ===== GRADIENTLAR ===== -->
+          <defs>
+            <linearGradient id="loginGrad1" x1="0" y1="0" x2="200" y2="200">
+              <stop offset="0%" stop-color="#00d9c0"/>
+              <stop offset="100%" stop-color="#7f5af0"/>
+            </linearGradient>
+            <linearGradient id="loginGrad2" x1="200" y1="0" x2="0" y2="200">
+              <stop offset="0%" stop-color="#7f5af0"/>
+              <stop offset="100%" stop-color="#00d9c0"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+
+      <!-- ===== SARIQLAR ===== -->
+      <div class="auth-badge">🔐 Xavfsiz Kirish</div>
+      <div class="auth-title">Xush kelibsiz <span>👋</span></div>
+
+      <!-- ===== XATOLIK ===== -->
+      <% if (typeof error !== 'undefined' && error) { %>
+      <div class="auth-error">⚠️ <%= error %></div>
+      <% } %>
+
+      <!-- ===== FORMA ===== -->
+      <form action="/login" method="POST">
+        <div class="form-group">
+          <label>Foydalanuvchi nomi</label>
+          <div class="input-wrap">
+            <span class="input-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10Z" stroke="currentColor" stroke-width="2"/>
+                <path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </span>
+            <input
+              type="text"
+              name="username"
+              class="form-control"
+              placeholder="Loginingizni kiriting"
+              autocomplete="off"
+              autofocus
+              required
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Parol</label>
+          <div class="input-wrap">
+            <span class="input-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="4" y="10" width="16" height="10" rx="2" stroke="currentColor" stroke-width="2"/>
+                <path d="M8 10V7a4 4 0 1 1 8 0v3" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </span>
+            <input
+              type="password"
+              name="password"
+              id="password-field"
+              class="form-control has-toggle"
+              placeholder="Parolingizni kiriting"
+              required
+            />
+            <button type="button" class="toggle-password" id="toggle-password">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z" stroke="currentColor" stroke-width="2"/>
+                <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-auth">🚀 Kirish</button>
+      </form>
+
+      <!-- ===== O'TGICH ===== -->
+      <div class="auth-switch">
+        Hisobingiz yo'qmi? <a href="/register">Ro'yxatdan o'ting</a>
+      </div>
+    </div>
+
+    <script>
+      // ===== TOGGLE PASSWORD =====
+      const toggleBtn = document.getElementById("toggle-password");
+      const passwordField = document.getElementById("password-field");
+      if (toggleBtn && passwordField) {
+        toggleBtn.addEventListener("click", function () {
+          const isHidden = passwordField.type === "password";
+          passwordField.type = isHidden ? "text" : "password";
+          this.innerHTML = isHidden 
+            ? `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z" stroke="currentColor" stroke-width="2"/>
+                <path d="M3 3l18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/>
+               </svg>`
+            : `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z" stroke="currentColor" stroke-width="2"/>
+                <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/>
+               </svg>`;
+        });
+      }
+
+      // ===== PARTICLES =====
+      function createParticles() {
+        const container = document.getElementById("particles");
+        const colors = ['#00d9c0', '#7f5af0', '#ff6b81', '#ffd166', '#4ecdc4'];
+        
+        for (let i = 0; i < 30; i++) {
+          const particle = document.createElement("div");
+          particle.className = "particle";
+          const size = Math.random() * 4 + 2;
+          const color = colors[Math.floor(Math.random() * colors.length)];
+          const left = Math.random() * 100;
+          const duration = Math.random() * 15 + 10;
+          const delay = Math.random() * 20;
+          
+          particle.style.cssText = `
+            width: ${size}px;
+            height: ${size}px;
+            left: ${left}%;
+            background: ${color};
+            animation-duration: ${duration}s;
+            animation-delay: ${delay}s;
+          `;
+          container.appendChild(particle);
+        }
+      }
+      createParticles();
+    </script>
+  </body>
+</html>

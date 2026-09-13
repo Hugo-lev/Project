@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="uz">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>REJA | Boshqaruv</title>
+    
+    <!-- Bootstrap 4 -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+    />
+    
+    <!-- Font Awesome 6 -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    
+    <style>
+      /* ==========================================
+         ROOT O'ZGARUVCHILAR
+         ========================================== */
+      :root {
+        --bg-1: #0f0c29;
+        --bg-2: #302b63;
+        --bg-3: #24243e;
+        --accent: #00d9c0;
+        --accent-2: #7f5af0;
+        --danger: #ff6b81;
+        --danger-dark: #e6435c;
+        --glass: rgba(255, 255, 255, 0.06);
+        --glass-border: rgba(255, 255, 255, 0.12);
+        --text-main: #f2f2f7;
+        --text-muted: #a3a3b8;
+      }
+
+      /* ==========================================
+         GLOBAL
+         ========================================== */
+      * {
+        font-family: "Manrope", sans-serif;
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        min-height: 100vh;
+        background: linear-gradient(-45deg, var(--bg-1), var(--bg-2), var(--bg-3), var(--bg-1));
+        background-size: 400% 400%;
+        animation: gradientShift 18s ease infinite;
+        padding: 30px 0 50px;
+        position: relative;
+        overflow-x: hidden;
+      }
+
+      @keyframes gradientShift {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+
+      /* ==========================================
+         FLOATING BLOBS
+         ========================================== */
+      .blob {
+        position: fixed;
+        border-radius: 50%;
+        filter: blur(120px);
+        opacity: 0.3;
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      .blob-1 {
+        width: 450px;
+        height: 450px;
+        background: var(--accent);
+        top: -150px;
+        left: -150px;
+        animation: floatBlob 12s ease-in-out infinite;
+      }
+
+      .blob-2 {
+        width: 350px;
+        height: 350px;
+        background: var(--accent-2);
+        bottom: -100px;
+        right: -100px;
+        animation: floatBlob 14s ease-in-out infinite reverse;
+      }
+
+      .blob-3 {
+        width: 200px;
+        height: 200px;
+        background: #ff6b81;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        animation: floatBlob 18s ease-in-out infinite;
+        opacity: 0.15;
+      }
+
+      @keyframes floatBlob {
+        0%, 100% { transform: translate(0, 0) scale(1); }
+        33% { transform: translate(80px, -60px) scale(1.2); }
+        66% { transform: translate(-40px, 60px) scale(0.8); }
+      }
+
+      /* ==========================================
+         CONTAINER
+         ========================================== */
+      .container {
+        max-width: 1100px;
+        position: relative;
+        z-index: 1;
+      }
+
+      /* ==========================================
+         HEADER
+         ========================================== */
+      .header-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 30px;
+        flex-wrap: wrap;
+        gap: 15px;
+      }
+
+      .header-left {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .header-left .logo {
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        padding: 10px 20px;
+        border-radius: 14px;
+        color: #0f0c29;
+        font-weight: 800;
+        font-size: 22px;
+        letter-spacing: -0.5px;
+        box-shadow: 0 8px 25px rgba(0, 217, 192, 0.3);
+        animation: logoPulse 3s ease-in-out infinite;
+      }
+
+      @keyframes logoPulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.02); }
+      }
+
+      .header-left .user-info {
+        color: var(--text-main);
+        font-weight: 600;
+        font-size: 15px;
+        background: var(--glass);
+        padding: 8px 20px;
+        border-radius: 30px;
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(10px);
+      }
+
+      .header-left .user-info i {
+        color: var(--accent);
+        margin-right: 8px;
+      }
+
+      .header-right {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .header-right .btn-logout {
+        background: var(--glass);
+        border: 1px solid var(--glass-border);
+        color: var(--text-muted);
+        padding: 8px 22px;
+        border-radius: 30px;
+        font-weight: 600;
+        font-size: 13px;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+        text-decoration: none;
+      }
+
+      .header-right .btn-logout:hover {
+        color: var(--danger);
+        border-color: rgba(255, 107, 129, 0.4);
+        transform: translateY(-2px);
+      }
+
+      .header-right .btn-logout i {
+        margin-right: 6px;
+      }
+
+      /* ==========================================
+         STATS CARDS
+         ========================================== */
+      .stats-row {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 15px;
+        margin-bottom: 30px;
+      }
+
+      .stat-card {
+        background: var(--glass);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(14px);
+        border-radius: 16px;
+        padding: 18px 22px;
+        transition: all 0.3s ease;
+        animation: fadeInUp 0.6s ease both;
+      }
+
+      .stat-card:nth-child(1) { animation-delay: 0.1s; }
+      .stat-card:nth-child(2) { animation-delay: 0.2s; }
+      .stat-card:nth-child(3) { animation-delay: 0.3s; }
+      .stat-card:nth-child(4) { animation-delay: 0.4s; }
+
+      .stat-card:hover {
+        transform: translateY(-4px);
+        border-color: rgba(0, 217, 192, 0.3);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+      }
+
+      .stat-card .stat-number {
+        color: var(--text-main);
+        font-size: 28px;
+        font-weight: 800;
+        background: linear-gradient(90deg, var(--accent), var(--accent-2));
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .stat-card .stat-label {
+        color: var(--text-muted);
+        font-size: 13px;
+        font-weight: 500;
+        margin-top: 2px;
+      }
+
+      .stat-card .stat-icon {
+        float: right;
+        font-size: 28px;
+        opacity: 0.3;
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* ==========================================
+         TOOLBAR
+         ========================================== */
+      .toolbar {
+        background: var(--glass);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(14px);
+        border-radius: 16px;
+        padding: 16px 20px;
+        margin-bottom: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .toolbar .search-box {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex: 1;
+        min-width: 200px;
+      }
+
+      .toolbar .search-box input {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1.5px solid var(--glass-border);
+        border-radius: 12px;
+        padding: 9px 16px;
+        color: var(--text-main);
+        width: 100%;
+        max-width: 280px;
+        transition: all 0.3s ease;
+        font-size: 14px;
+      }
+
+      .toolbar .search-box input::placeholder {
+        color: var(--text-muted);
+      }
+
+      .toolbar .search-box input:focus {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 4px rgba(0, 217, 192, 0.12);
+        outline: none;
+      }
+
+      .toolbar .filter-box select {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1.5px solid var(--glass-border);
+        border-radius: 12px;
+        padding: 9px 16px;
+        color: var(--text-main);
+        font-size: 14px;
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+
+      .toolbar .filter-box select option {
+        background: #1a1a2e;
+        color: #fff;
+      }
+
+      .toolbar .filter-box select:focus {
+        border-color: var(--accent);
+        outline: none;
+      }
+
+      .toolbar .btn-add {
+        background: linear-gradient(120deg, var(--accent), var(--accent-2));
+        border: none;
+        border-radius: 12px;
+        padding: 10px 24px;
+        font-weight: 700;
+        color: #0f0c29;
+        transition: all 0.3s ease;
+        box-shadow: 0 8px 20px rgba(0, 217, 192, 0.25);
+        white-space: nowrap;
+        cursor: pointer;
+      }
+
+      .toolbar .btn-add:hover {
+        transform: translateY(-2px) scale(1.03);
+        box-shadow: 0 12px 30px rgba(127, 90, 240, 0.35);
+      }
+
+      .toolbar .btn-add i {
+        margin-right: 6px;
+      }
+
+      .toolbar .btn-category {
+        background: rgba(255, 107, 129, 0.15);
+        border: 1px solid rgba(255, 107, 129, 0.2);
+        border-radius: 12px;
+        padding: 10px 20px;
+        font-weight: 700;
+        color: var(--danger);
+        transition: all 0.3s ease;
+        white-space: nowrap;
+        cursor: pointer;
+      }
+
+      .toolbar .btn-category:hover {
+        background: rgba(255, 107, 129, 0.25);
+        transform: translateY(-2px);
+      }
+
+      .toolbar .btn-category i {
+        margin-right: 6px;
+      }
+
+      /* ==========================================
+         TABLE
+         ========================================== */
+      .table-wrapper {
+        background: var(--glass);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(14px);
+        border-radius: 16px;
+        overflow: hidden;
+        animation: fadeInUp 0.6s ease 0.3s both;
+        overflow-x: auto;
+      }
+
+      .table {
+        margin-bottom: 0;
+        color: var(--text-main);
+      }
+
+      .table thead th {
+        background: rgba(255, 255, 255, 0.04);
+        border-bottom: 1px solid var(--glass-border);
+        color: var(--text-muted);
+        font-weight: 700;
+        font-size: 12px;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        padding: 16px 18px;
+        border: none;
+        position: sticky;
+        top: 0;
+        z-index: 2;
+      }
+
+      .table tbody td {
+        padding: 14px 18px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        vertical-align: middle;
+        font-size: 14px;
+      }
+
+      .table tbody tr {
+        transition: all 0.3s ease;
+        animation: rowFade 0.4s ease both;
+      }
+
+      @keyframes rowFade {
+        from {
+          opacity: 0;
+          transform: translateX(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      .table tbody tr:hover {
+        background: rgba(255, 255, 255, 0.04);
+        transform: scale(1.005);
+      }
+
+      .table tbody tr:last-child td {
+        border-bottom: none;
+      }
+
+      /* ==========================================
+         KATEGORIYA BADGE
+         ========================================== */
+      .category-badge {
+        display: inline-block;
+        padding: 4px 14px;
+        border-radius: 30px;
+        font-size: 12px;
+        font-weight: 600;
+        color: #fff;
+        white-space: nowrap;
+      }
+
+      /* ==========================================
+         SANA
+         ========================================== */
+      .date-text {
+        color: var(--text-muted);
+        font-size: 12px;
+        white-space: nowrap;
+      }
+
+      /* ==========================================
+         ACTION BUTTONS
+         ========================================== */
+      .action-btn {
+        border: none;
+        border-radius: 10px;
+        padding: 6px 14px;
+        font-size: 12px;
+        font-weight: 600;
+        transition: all 0.25s ease;
+        margin: 0 3px;
+        cursor: pointer;
+      }
+
+      .action-btn.edit-btn {
+        background: rgba(255, 209, 102, 0.15);
+        color: #ffd166;
+        border: 1px solid rgba(255, 209, 102, 0.25);
+      }
+
+      .action-btn.edit-btn:hover {
+        background: #ffd166;
+        color: #3a2c00;
+        transform: scale(1.08);
+      }
+
+      .action-btn.delete-btn {
+        background: rgba(255, 107, 129, 0.15);
+        color: var(--danger);
+        border: 1px solid rgba(255, 107, 129, 0.25);
+      }
+
+      .action-btn.delete-btn:hover {
+        background: var(--danger-dark);
+        color: #fff;
+        transform: scale(1.08);
+      }
+
+      /* ==========================================
+         EMPTY STATE
+         ========================================== */
+      .empty-state {
+        text-align: center;
+        padding: 60px 20px;
+        color: var(--text-muted);
+      }
+
+      .empty-state i {
+        font-size: 48px;
+        margin-bottom: 16px;
+        opacity: 0.3;
+        display: block;
+      }
+
+      .empty-state h5 {
+        color: var(--text-main);
+        margin-bottom: 8px;
+      }
+
+      /* ==========================================
+         MODAL
+         ========================================== */
+      .modal-content {
+        background: #1a1a2e;
+        border: 1px solid var(--glass-border);
+        border-radius: 20px;
+        color: var(--text-main);
+      }
+
+      .modal-header {
+        border-bottom: 1px solid var(--glass-border);
+        padding: 20px 24px;
+      }
+
+      .modal-header .modal-title {
+        font-weight: 700;
+      }
+
+      .modal-header .close {
+        color: #fff;
+        opacity: 0.6;
+      }
+
+      .modal-header .close:hover {
+        opacity: 1;
+      }
+
+      .modal-body {
+        padding: 24px;
+      }
+
+      .modal-footer {
+        border-top: 1px solid var(--glass-border);
+        padding: 16px 24px;
+      }
+
+      .modal .form-control {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1.5px solid var(--glass-border);
+        color: var(--text-main);
+        border-radius: 12px;
+        padding: 11px 16px;
+        font-size: 14px;
+        transition: all 0.3s ease;
+      }
+
+      .modal .form-control:focus {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 4px rgba(0, 217, 192, 0.12);
+        background: rgba(255, 255, 255, 0.08);
+        outline: none;
+      }
+
+      .modal .form-control::placeholder {
+        color: var(--text-muted);
+      }
+
+      .modal .form-group {
+        margin-bottom: 16px;
+      }
+
+      .modal .form-group label {
+        color: var(--text-muted);
+        font-size: 13px;
+        font-weight: 600;
+        margin-bottom: 5px;
+        display: block;
+      }
+
+      .modal .btn-primary {
+        background: linear-gradient(120deg, var(--accent), var(--accent-2));
+        border: none;
+        border-radius: 12px;
+        padding: 10px 28px;
+        font-weight: 700;
+        color: #0f0c29;
+        transition: all 0.3s ease;
+      }
+
+      .modal .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(127, 90, 240, 0.3);
+      }
+
+      .modal .btn-secondary {
+        background: var(--glass);
+        border: 1px solid var(--glass-border);
+        color: var(--text-muted);
+        border-radius: 12px;
+        padding: 10px 24px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+      }
+
+      .modal .btn-secondary:hover {
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      /* ==========================================
+         KATEGORIYA ITEM
+         ========================================== */
+      .category-item {
+        transition: all 0.2s ease;
+        border-radius: 8px;
+      }
+
+      .category-item:hover {
+        background: rgba(255, 255, 255, 0.08) !important;
+      }
+
+      /* ==========================================
+         SCROLLBAR
+         ========================================== */
+      ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--accent-2);
+        border-radius: 10px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      /* ==========================================
+         RESPONSIVE
+         ========================================== */
+      @media (max-width: 768px) {
+        .header-bar {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        .header-right {
+          width: 100%;
+          justify-content: flex-start;
+        }
+        .toolbar {
+          flex-direction: column;
+          align-items: stretch;
+        }
+        .toolbar .search-box input {
+          max-width: 100%;
+        }
+        .stats-row {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .table thead th,
+        .table tbody td {
+          padding: 10px 12px;
+          font-size: 13px;
+        }
+        .action-btn {
+          padding: 4px 10px;
+          font-size: 11px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .stats-row {
+          grid-template-columns: 1fr;
+        }
+        .table-wrapper {
+          border-radius: 12px;
+        }
+        .table thead th,
+        .table tbody td {
+          padding: 8px 10px;
+          font-size: 12px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ==========================================
+         FLOATING BLOBS
+         ========================================== -->
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+
+    <!-- ==========================================
+         CONTAINER
+         ========================================== -->
+    <div class="container">
+      <!-- ===== HEADER ===== -->
+      <div class="header-bar">
+        <div class="header-left">
+          <div class="logo">📋 REJA</div>
+          <div class="user-info">
+            <i class="fas fa-user-circle"></i>
+            <%= username %>
+          </div>
+        </div>
+        <div class="header-right">
+          <a href="/logout" class="btn-logout">
+            <i class="fas fa-sign-out-alt"></i> Chiqish
+          </a>
+        </div>
+      </div>
+
+      <!-- ===== STATS ===== -->
+      <div class="stats-row">
+        <div class="stat-card">
+          <span class="stat-icon">📊</span>
+          <div class="stat-number"><%= items.length %></div>
+          <div class="stat-label">Jami Rejalar</div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-icon">📌</span>
+          <div class="stat-number"><%= categories ? categories.length : 0 %></div>
+          <div class="stat-label">Kategoriyalar</div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-icon">✅</span>
+          <div class="stat-number">0</div>
+          <div class="stat-label">Bajarilgan</div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-icon">⏳</span>
+          <div class="stat-number">0</div>
+          <div class="stat-label">Kutilayotgan</div>
+        </div>
+      </div>
+
+      <!-- ===== TOOLBAR ===== -->
+      <div class="toolbar">
+        <div class="search-box">
+          <input
+            type="text"
+            id="search-input"
+            placeholder="🔍 Reja bo'yicha qidirish..."
+            onkeyup="searchTable()"
+          />
+        </div>
+        <div class="filter-box">
+          <select id="category-filter" onchange="filterTable()">
+            <option value="">📂 Barcha kategoriyalar</option>
+            <% if (categories && categories.length) { %>
+              <% categories.forEach(function(cat) { %>
+                <option value="<%= cat._id %>">
+                  <%= cat.name %>
+                </option>
+              <% }); %>
+            <% } %>
+          </select>
+        </div>
+        <button class="btn-add" data-toggle="modal" data-target="#addModal">
+          <i class="fas fa-plus"></i> Yangi Reja
+        </button>
+        <button class="btn-category" data-toggle="modal" data-target="#categoryModal">
+          <i class="fas fa-tags"></i> Kategoriya
+        </button>
+      </div>
+
+      <!-- ===== TABLE ===== -->
+      <div class="table-wrapper">
+        <table class="table" id="reja-table">
+          <thead>
+            <tr>
+              <th style="width: 50px;">#</th>
+              <th style="min-width: 200px;">Reja</th>
+              <th style="min-width: 130px;">Kategoriya</th>
+              <th style="min-width: 110px;">Yaratilgan</th>
+              <th style="min-width: 150px; text-align: center;">Amallar</th>
+            </tr>
+          </thead>
+          <tbody id="item-list">
+            <% if (items.length === 0) { %>
+            <tr>
+              <td colspan="5">
+                <div class="empty-state">
+                  <i class="fas fa-inbox"></i>
+                  <h5>Hozircha rejalar yo'q</h5>
+                  <p class="text-muted">"Yangi Reja" tugmasini bosib birinchi rejangizni qo'shing!</p>
+                </div>
+              </td>
+            </tr>
+            <% } else { %>
+              <% items.forEach(function(item, index) { %>
+              <tr data-category="<%= item.categoryId || '' %>" data-search="<%= item.reja %>">
+                <td><%= index + 1 %></td>
+                <td>
+                  <span class="item-text"><%= item.reja %></span>
+                </td>
+                <td>
+                  <% if (item.category) { %>
+                    <span class="category-badge" style="background-color: <%= item.category.color || '#6c757d' %>">
+                      <%= item.category.name %>
+                    </span>
+                  <% } else { %>
+                    <span style="color: var(--text-muted); font-size: 13px;">—</span>
+                  <% } %>
+                </td>
+                <td>
+                  <span class="date-text">
+                    <%= item.createdAt ? new Date(item.createdAt).toLocaleDateString('uz-UZ') : '-' %>
+                  </span>
+                </td>
+                <td style="text-align: center;">
+                  <button
+                    class="action-btn edit-btn"
+                    data-id="<%= item._id %>"
+                    data-text="<%= item.reja %>"
+                    data-category="<%= item.categoryId || '' %>"
+                    onclick="openEditModal(this)"
+                  >
+                    <i class="fas fa-pen"></i>
+                  </button>
+                  <button
+                    class="action-btn delete-btn"
+                    data-id="<%= item._id %>"
+                    onclick="deleteItem(this)"
+                  >
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </td>
+              </tr>
+              <% }); %>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         ADD MODAL
+         ========================================== -->
+    <div class="modal fade" id="addModal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">
+              <i class="fas fa-plus-circle" style="color: var(--accent);"></i> Yangi Reja Qo'shish
+            </h5>
+            <button type="button" class="close" data-dismiss="modal">
+              <span>&times;</span>
+            </button>
+          </div>
+          <form id="create-form">
+            <div class="modal-body">
+              <div class="form-group">
+                <label>Reja matni</label>
+                <input
+                  type="text"
+                  id="create-field"
+                  class="form-control"
+                  placeholder="Nima rejalashtiryapsiz?"
+                  autofocus
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label>Kategoriya</label>
+                <select id="category-select" class="form-control">
+                  <option value="">Kategoriya tanlang</option>
+                  <% if (categories && categories.length) { %>
+                    <% categories.forEach(function(cat) { %>
+                      <option value="<%= cat._id %>">
+                        <%= cat.name %>
+                      </option>
+                    <% }); %>
+                  <% } %>
+                </select>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Bekor qilish</button>
+              <button type="submit" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Qo'shish
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         EDIT MODAL
+         ========================================== -->
+    <div class="modal fade" id="editModal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">
+              <i class="fas fa-pen" style="color: #ffd166;"></i> Rejani Tahrirlash
+            </h5>
+            <button type="button" class="close" data-dismiss="modal">
+              <span>&times;</span>
+            </button>
+          </div>
+          <form id="edit-form">
+            <div class="modal-body">
+              <input type="hidden" id="edit-id" />
+              <div class="form-group">
+                <label>Reja matni</label>
+                <input
+                  type="text"
+                  id="edit-field"
+                  class="form-control"
+                  placeholder="Rejani o'zgartiring"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label>Kategoriya</label>
+                <select id="edit-category" class="form-control">
+                  <option value="">Kategoriya tanlang</option>
+                  <% if (categories && categories.length) { %>
+                    <% categories.forEach(function(cat) { %>
+                      <option value="<%= cat._id %>">
+                        <%= cat.name %>
+                      </option>
+                    <% }); %>
+                  <% } %>
+                </select>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Bekor qilish</button>
+              <button type="submit" class="btn btn-primary">
+                <i class="fas fa-save"></i> Saqlash
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         CATEGORY MODAL
+         ========================================== -->
+    <div class="modal fade" id="categoryModal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">
+              <i class="fas fa-tags" style="color: var(--accent-2);"></i> Kategoriyalar
+            </h5>
+            <button type="button" class="close" data-dismiss="modal">
+              <span>&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <!-- Kategoriya qo'shish formasi -->
+            <form id="category-form" class="mb-3">
+              <div class="row g-2">
+                <div class="col-md-5">
+                  <input type="text" id="category-name" class="form-control" placeholder="📌 Nom" required />
+                </div>
+                <div class="col-md-4">
+                  <input type="text" id="category-desc" class="form-control" placeholder="📝 Tavsif" />
+                </div>
+                <div class="col-md-2">
+                  <input type="color" id="category-color" class="form-control p-1" value="#00d9c0" />
+                </div>
+                <div class="col-md-1">
+                  <button class="btn btn-primary" type="submit" style="width: 100%; padding: 10px 0; border-radius: 12px;">
+                    <i class="fas fa-plus"></i>
+                  </button>
+                </div>
+              </div>
+            </form>
+
+            <!-- Kategoriyalar ro'yxati -->
+            <div id="category-list">
+              <p class="text-muted text-center py-3">⏳ Yuklanmoqda...</p>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Yopish</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         SCRIPTS
+         ========================================== -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="/browser.js"></script>
+  </body>
+</html>
